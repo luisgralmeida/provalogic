@@ -17,7 +17,7 @@ public class main {
 			System.out.println("1 - Adicione uma transportadora ao sistema");
 			System.out.println("2 - Calcule a melhor transportadora para um frete");
 			System.out.println("3 - Listar transportadoras");
-			System.out.println("4 - Fianlizar programa");
+			System.out.println("4 - Finalizar programa");
 			try {
 				escolha = Integer.valueOf(sc.nextLine());
 				switch (escolha) {
@@ -63,7 +63,7 @@ public class main {
 			banco = new Postgre(nome);
 		}else {
 			if(tipoBD.equals("REST")) {
-				
+			banco = new Rest(nome);
 			}
 		}
 		if (banco != null) {

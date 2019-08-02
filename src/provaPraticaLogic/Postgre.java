@@ -3,7 +3,6 @@ package provaPraticaLogic;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Scanner;
 
 import provaPraticaLogic.manipulaBD;
@@ -15,7 +14,6 @@ public class Postgre extends manipulaBD {
 		String url;
 		String user;
 		String pass;
-		Transportadora trans = null;
 		
 		System.out.println("URL do banco de dados:");
 		url = sc.nextLine();

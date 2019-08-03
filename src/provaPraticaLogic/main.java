@@ -65,7 +65,7 @@ public class main {
 			banco = new Postgre(nome);
 		}else {
 			if(tipoBD.equals("REST")) {
-			banco = new Rest(nome);
+			banco = new Restful(nome);
 			}else {
 				System.out.println("Comando desconhecido");
 			}

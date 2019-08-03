@@ -29,10 +29,13 @@ public class FreteTempo extends calculaFrete{
 		Transportadora pointer = this.originais.first();
 		int idCount = 0;
 		while (pointer != null) {
+			this.ordenadas[0][idCount] = idCount;
 			if (this.tipo.equals(pointer.tipoTransporte) || this.tipo.equals("")) {
-				this.ordenadas[0][idCount] = idCount;
-				this.ordenadas[1][idCount] = pointer.getTempoMedioKm()*this.distancia;
+				this.ordenadas[1][idCount] = pointer.getValorpKm()*this.distancia/10;
+			}else {
+				this.ordenadas[1][idCount] = Double.POSITIVE_INFINITY;
 			}
+			idCount++;
 			pointer = pointer.next();
 		}
 	}

@@ -35,10 +35,13 @@ public class Postgre extends manipulaBD {
 				switch (s.getInt("idTipoTransporte")) {
 					case 1:
 						tt = "Aereo";
+						break;
 					case 2:
 						tt = "Terrestre";
+						break;
 					default:
 						tt = "Não especificado";
+						break;
 				}
 				tmkm = s.getInt("tempo");
 				if((vpkm > 0) && (tmkm > 0)) {

@@ -20,11 +20,9 @@ abstract class calculaFrete {
 	protected double[][] ordena(double selection[][]) {
 		double temp[] = new double[2];
 		int i, j, min;
-		
-		for (i = 0; i < selection.length-1; i++){
+		for (i = 0; i < selection[1].length-1; i++){
 			min = i;
-			for (j = i+1; j < selection.length-1; j++){
-			    
+			for (j = i+1; j < selection[1].length; j++){
 				if (selection[1][j] < selection[1][min]) {
 					min = j;
 			    }
@@ -37,6 +35,9 @@ abstract class calculaFrete {
 			selection[0][min] = temp[0];
 			selection[1][min] = temp[1];
 		}
+		int t;
+		for (t = 0; t < selection[0].length; t++ )
+			{System.out.println(selection[0][t]+" "+selection[1][t]);}
 		return selection;
 	}
 	

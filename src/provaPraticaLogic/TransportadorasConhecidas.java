@@ -1,8 +1,8 @@
 package provaPraticaLogic;
 
 public class TransportadorasConhecidas {
-	//Lista de transportadoras
 	
+	//Handler da lista de transportadoras
 	protected Transportadora primeiraTrans = null; //Transportadoras conhecidas
 	protected Transportadora pointerTrans = null;//Ponteiro da lista
 	
@@ -21,6 +21,15 @@ public class TransportadorasConhecidas {
 	
 	public Transportadora first() {
 		return this.primeiraTrans;
+	}
+	
+	public Transportadora getTransportadora(int indice) {
+		Transportadora pointer = this.first();
+		int i;
+		for (i = 0; i < indice; i++) {
+			pointer = pointer.next();
+		}
+		return pointer;
 	}
 	
 	public int contaTransportadoras() {

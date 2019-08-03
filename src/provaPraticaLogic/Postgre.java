@@ -9,6 +9,7 @@ import provaPraticaLogic.manipulaBD;
 
 public class Postgre extends manipulaBD {
 
+	//Classe para conexao com banco de dados Postgre
 	public Postgre(String nome) {
 		Scanner sc = new Scanner(System.in);
 		String url;
@@ -52,7 +53,6 @@ public class Postgre extends manipulaBD {
 			}
 			con.close();
 		} catch (Throwable e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

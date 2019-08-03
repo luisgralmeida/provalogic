@@ -2,6 +2,7 @@ package provaPraticaLogic;
 
 import java.text.DecimalFormat;
 
+//Classe abstrata com os metodos para calculo do frete
 abstract class calculaFrete {
 
 	protected TransportadorasConhecidas originais;
@@ -17,55 +18,54 @@ abstract class calculaFrete {
 		this.ordenadas = new double[2][tc.contaTransportadoras()];
 	}
 	
+	//Metodo de ordenacao Bubble Sort
 	protected double[][] ordena(double selection[][]) {
-		double temp[] = new double[2];
-		int i, j, min;
-		for (i = 0; i < selection[1].length-1; i++){
-			min = i;
-			for (j = i+1; j < selection[1].length; j++){
-				if (selection[1][j] < selection[1][min]) {
-					min = j;
-			    }
+		double temp[] = new double[2]; //temp[posicao da transportadora][Preco ou Tempo]
+		int i = 0;
+		boolean fim = true;
+		while(fim) {
+			fim = false;
+			for (i = 0; i < selection[1].length-1; i++){
+				if (selection[1][i] > selection[1][i+1]) {
+					temp[0] = selection[0][i];
+					temp[1] = selection[1][i];
+					selection[0][i] = selection[0][i+1];
+					selection[1][i] = selection[1][i+1];
+					selection[0][i+1] = temp[0];
+					selection[1][i+1] = temp[1];
+					fim = true;
+				}
 			}
-			
-			temp[0] = selection[0][i];
-			temp[1] = selection[1][i];
-			selection[0][i] = selection[0][min];
-			selection[1][i] = selection[1][min];
-			selection[0][min] = temp[0];
-			selection[1][min] = temp[1];
 		}
-		int t;
-		for (t = 0; t < selection[0].length; t++ )
-			{System.out.println(selection[0][t]+" "+selection[1][t]);}
 		return selection;
 	}
 	
-	protected int desempate() {
+	//Metodo que conta os resultados iguais ao melhor
+	protected int empates() {
+		int retorno = 0;
 		int i;
-		
-		for (i = 0; i < this.ordenadas.length-1; i++) {
-			if (this.ordenadas[1][i] < this.ordenadas[1][i]) {
-				return i;
+		for (i = 1; i < this.ordenadas[0].length; i++) {
+			if (this.ordenadas[1][0] == this.ordenadas[1][i]) {
+				retorno++;
 			}
 		}
-		return i;
+		return retorno;
 	}
 	
+	//Metodo construtor da string de resposta final do calculo do frete
 	protected void buildResposta(int count, double[][] melhores) {
 		Transportadora pointer;
-		int i, j;
-		for (i = 0; i <count; i++) {
-			pointer = this.originais.first();
-			for (j = 0; j < this.ordenadas[0][i]; j++) {
-				pointer = pointer.next();
-			}
-			this.resposta = this.resposta.concat("Transportadora: "+pointer.getNome()+" |"+"Valor total: "+
-			new DecimalFormat("#.##").format((pointer.getTempoMedioKm()*distancia/10))
-			+" |Tempo total: "+this.converteMin((pointer.getTempoMedioKm()*distancia))+" mins");
-		}
+		int t;
+		for (t = 0; t < count+1; t++ ){
+			pointer = this.originais.getTransportadora((int)melhores[0][t]);
+			this.resposta = this.resposta.concat("Transportadora: "+pointer.getNome());
+			this.resposta = this.resposta.concat(", Valor: "+(pointer.getValorpKm()*this.distancia/10));
+			this.resposta = this.resposta.concat(", Prazo: "+converteMin(pointer.getTempoMedioKm()*this.distancia));
+			this.resposta = this.resposta.concat(" mins\n");
+		}		
 	}
 	
+	//Conversao de segundos para minutos
 	protected String converteMin(double s) {
 		s = s/60;
 		return new DecimalFormat("#.##").format(s);

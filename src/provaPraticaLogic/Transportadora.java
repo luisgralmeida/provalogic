@@ -1,5 +1,6 @@
 package provaPraticaLogic;
 
+//Estrutura de dados para guardar dados das transportadoras em forma de lista
 public class Transportadora {
 	
 	protected String nome; //Nome da transportadora

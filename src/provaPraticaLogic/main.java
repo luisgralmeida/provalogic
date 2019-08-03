@@ -5,12 +5,12 @@ import java.util.Scanner;
 public class main {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		boolean finaliza = false; //Variavel de finalização do programa
 		Scanner sc = new Scanner(System.in); //variavel de entrada de dados de usuário para o menu
-		int escolha = 0;
-		TransportadorasConhecidas lista = new TransportadorasConhecidas();
+		int escolha = 0; //Escolhas do menu do usuario
+		TransportadorasConhecidas lista = new TransportadorasConhecidas(); //Lista das transportadoras e seus dados
 		
+		//Menu principal
 		System.out.println("Bem-vindo ao sistema!");
 		while (!finaliza) {
 			System.out.println("Menu - Selecione uma opção:");
@@ -47,6 +47,8 @@ public class main {
 		System.out.println("Programa finalizado com sucesso!");
 	}
 	
+
+	//Adiciona os dados de uma transportadora na Lista
 	public static void addTransportadora(TransportadorasConhecidas lista) {
 		Scanner sc = new Scanner(System.in);
 		String nome;
@@ -64,6 +66,8 @@ public class main {
 		}else {
 			if(tipoBD.equals("REST")) {
 			banco = new Rest(nome);
+			}else {
+				System.out.println("Comando desconhecido");
 			}
 		}
 		if (banco != null) {
@@ -72,9 +76,9 @@ public class main {
 		}
 	}
 	
+	//Menu que prepara o calculo do frete
 	public static void calcFrete(TransportadorasConhecidas lista) {
 		Scanner sc = new Scanner(System.in);
-		TransportadorasConhecidas ordenadas = new TransportadorasConhecidas();
 		int prioridade; //1 - preco | 2 - tempo
 		String trajeto;
 		int distancia;
@@ -117,7 +121,12 @@ public class main {
 				System.out.println("Comando não reconhecido.");
 		}
 		if (cf != null) {
+			System.out.println("Trajeto: "+trajeto);
 			System.out.println(cf.getResposta());
 		}
+	}
+	
+	public static void printa(String s) {
+		System.out.println(s);
 	}
 }
